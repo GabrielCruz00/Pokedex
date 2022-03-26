@@ -18,11 +18,18 @@ function fetchPokemon(){
         let dataId = data.id;
         let dataName = data.name;
         let dataType = data.types[0].type.name;
-
-        pokeName(dataName);
+        let dataStats = data.stats.map(function ({ base_stat, stat }) {
+                return `${stat.name}: ${base_stat}`;
+            });
+        let dataMoves = data.moves.map(function({move}){
+                return move.name;
+            });
+        pokeName(dataName.toUpperCase());
         pokeImage(dataImg);
         pokeId(dataId);
         pokeType(dataType);
+        pokeStats(dataStats);
+        pokeMoves(dataMoves);
     });
 }
 
@@ -43,7 +50,10 @@ function pokeType(type){
     pokeType.textContent = type;
 }
 function pokeStats(stats){
-    // stats.map("name" => "base_stat");
     const pokeStats = document.getElementById("pokeStats");
     pokeStats.textContent = stats;
+}
+function pokeMoves(move){
+    const pokeMoves = document.getElementById("pokeMoves");
+        pokeMoves.textContent = move;
 }
